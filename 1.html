@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>fancybox</title>
+		<!--css-->			
+		<link rel="stylesheet" type="text/css" href="fancybox-3.0/dist/jquery.fancybox.min.css"/>
+		<!--js-->
+		<script src="//code.jquery.com/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>			
+		<script src="fancybox-3.0/dist/jquery.fancybox.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<a href="img/1131981.gif" data-fancybox='group' data-caption="My caption">
+			<img src="img/1131981.gif"/>
+		</a>
+		<a href="img/1131981.gif" data-fancybox='group' data-caption="My caption">
+			<img src="img/1131981.gif"/>
+		</a>
+		<a href="img/1131981.gif" data-fancybox='group' data-caption="My caption">
+			<img src="img/1131981.gif"/>
+		</a>
+	</body>
+</html>
+<script type="text/javascript">
+	$("[data-fancybox]").fancybox({
+		// Options will go here
+	});
+	
+	$.fancybox.open('<div class="message"><h2>Hello!</h2><p>You are awesome!</p></div>');
+//	$.fancybox.close();
+</script>
