@@ -2,6 +2,10 @@
 	include ('nav.html');
 ?>
 <!DOCTYPE >
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor/ueditor.all.js"></script>
 <div id="" class="container">
 	<form action="" method="post">
 		<div class="form-group">
@@ -15,6 +19,24 @@
 			  <option>程序设计</option>
 			</select>
 	  	</div>
-		<input type="submit" class="btn btn-success" value="保存"/>
+	  	<div class="form-group">
+	  		<label for="">封面图</label>
+	  		<input type="file" name="cover_img" id="" value="" />
+	  	</div>
+	  	<div class="form-group">
+	  		<label for="">文章内容</label>
+	  		 <script id="editor" name="content" type="text/plain">
+    		</script>
+	  	</div>
+	  	<!-- 实例化编辑器 -->
+		<script type="text/javascript">
+				var ue = UE.getEditor('editor',{
+				        	 autoHeight: false,
+				        });
+				ue.ready(function(){
+				        	 ue.setContent('请输入文章内容');
+				        });
+		</script>
+		<input type="submit" class="btn btn-success" value="添加"/>
 	</form>
 </div>
