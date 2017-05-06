@@ -7,8 +7,11 @@
  * Time: 上午11: 32
  * UEditor编辑器通用上传类
  */
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
 class Uploader
 {
+
     private $fileField; //文件域名
     private $file; //文件上传对象
     private $base64; //文件上传对象
@@ -41,8 +44,14 @@ class Uploader
         "ERROR_HTTP_LINK" => "链接不是http链接",
         "ERROR_HTTP_CONTENTTYPE" => "链接contentType不正确",
         "INVALID_URL" => "非法 URL",
-        "INVALID_IP" => "非法 IP"
+        "INVALID_IP" => "非法 IP",
+        'QINIU_ERROR'=>"七牛云上传失败"
     );
+    //七牛云配置
+    private $ACCESSKEY = 'PyOJMJ_U2W4GIywPMpGWweQnyqBi4A2_orJbomgL';
+    private $SECRETKEY = 'GRhXhthA7xMnZsCM_HQ1o5sgG1aDtSTcm1TVDtCv';
+    private $BUCKET    = 'shop1120';
+    private $QNURL     = 'http://7xsvey.com1.z0.glb.clouddn.com/';
 
     /**
      * 构造函数
@@ -50,8 +59,9 @@ class Uploader
      * @param array $config 配置项
      * @param bool $base64 是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
      */
-    public function __construct($fileField, $config, $type = "upload")
+    public function __construct($fileField, $config, $type = "qiniuyun")
     {
+        $type = 'qiniuyun';
         $this->fileField = $fileField;
         $this->config = $config;
         $this->type = $type;
@@ -59,8 +69,10 @@ class Uploader
             $this->saveRemote();
         } else if($type == "base64") {
             $this->upBase64();
-        } else {
+        }  elseif($type == 'upload') {
             $this->upFile();
+        } else {
+            $this->qnUpFile();
         }
 
         $this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
@@ -126,6 +138,65 @@ class Uploader
     }
 
     /**
+     * 使用七牛云上传
+     */
+    public function qnUpFile()
+    {
+        $file = $this->file = $_FILES[$this->fileField];
+        if (!$file) {
+            $this->stateInfo = $this->getStateInfo("ERROR_FILE_NOT_FOUND");
+            return;
+        }
+        if ($this->file['error']) {
+            $this->stateInfo = $this->getStateInfo($file['error']);
+            return;
+        } else if (!file_exists($file['tmp_name'])) {
+            $this->stateInfo = $this->getStateInfo("ERROR_TMP_FILE_NOT_FOUND");
+            return;
+        } else if (!is_uploaded_file($file['tmp_name'])) {
+            $this->stateInfo = $this->getStateInfo("ERROR_TMPFILE");
+            return;
+        }
+
+        $this->oriName = $file['name'];
+        $this->fileSize = $file['size'];
+        $this->fileType = $this->getFileExt();
+        $this->fullName = $this->getFullName();
+        $this->filePath = $this->getFilePath();
+        $this->fileName = $this->getFileName();
+        $dirname = dirname($this->filePath);
+
+        //检查文件大小是否超出限制
+        if (!$this->checkSize()) {
+            $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
+            return;
+        }
+        //检查是否不允许的文件格式
+        if (!$this->checkType()) {
+            $this->stateInfo = $this->getStateInfo("ERROR_TYPE_NOT_ALLOWED");
+            return;
+        }
+
+        // 初始化签权对象
+        $auth = new Auth($this->ACCESSKEY, $this->SECRETKEY);
+        // 空间名  https://developer.qiniu.io/kodo/manual/concepts
+        // 生成上传Token
+        $token = $auth->uploadToken($this->BUCKET);
+        // 构建 UploadManager 对象
+        $uploadMgr = new UploadManager();
+        list($ret, $err) = $uploadMgr->putFile($token,$this->fileName,$file["tmp_name"]);
+        if ($err !== null) {
+            $this->stateInfo = $this->getStateInfo("QINIU_ERROR");
+            return;
+        } else {
+            $this->stateInfo = $this->stateMap[0];
+            $this->fullName  = $this->QNURL.$this->fileName;
+        }
+
+
+    }
+
+    /**
      * 处理base64编码的图片上传
      * @return mixed
      */
@@ -147,7 +218,6 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_SIZE_EXCEED");
             return;
         }
-
         //创建目录失败
         if (!file_exists($dirname) && !mkdir($dirname, 0777, true)) {
             $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");

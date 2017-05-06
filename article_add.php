@@ -1,9 +1,10 @@
 <?php
 	include ('nav.html');
+	require ('vendor/autoload.php');
 ?>
 <!DOCTYPE >
 <div id="" class="container">
-	<form action="add" method="post">
+	<form action="add" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="article_name">文章标题</label>
 	    	<input type="text" class="form-control" id="article_name" placeholder="请输入文章标题">
@@ -34,9 +35,11 @@
 				        	 autoHeight: false,
 							autoClearinitialContent:true,
 							initialContent:'请输入文章内容',
+							
+							
 				        });
 				ue.ready(function(){
-				    
+							console.log(ue.getOpt('scrawlActionName'));
 				        });
 		</script>
 		<input type="submit" class="btn btn-success" value="添加"/>
