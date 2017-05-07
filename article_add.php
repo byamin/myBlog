@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE >
 <div id="" class="container">
-	<form action="add" method="post" enctype="multipart/form-data">
+	<form action="article.php" method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="article_name">文章标题</label>
 	    	<input type="text" class="form-control" id="article_name" placeholder="请输入文章标题">
@@ -38,10 +38,8 @@
 							
 							
 				        });
-				ue.ready(function(){
-							console.log(ue.getOpt('scrawlActionName'));
-				        });
 		</script>
+        <input type="hidden" name="action" value="add">
 		<input type="submit" class="btn btn-success" value="添加"/>
 	</form>
 </div>

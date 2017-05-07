@@ -71,6 +71,8 @@ class Uploader
             $this->upBase64();
         }  elseif($type == 'upload') {
             $this->upFile();
+        } elseif($type == 'qiniuyun') {
+            $this->qnUpFile();
         } else {
             $this->qnUpFile();
         }
