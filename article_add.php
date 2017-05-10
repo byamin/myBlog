@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 	include ('nav.php');
 	
 	$categorys = db_find('category',['status'=>0]);
@@ -15,7 +16,7 @@
 ?>
 <!DOCTYPE >
 <div id="" class="container">
-	<form action="" method="post">
+	<form action="article.php" method="post"  enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="article_name">文章标题</label>
 	    	<input type="text" class="form-control" id="article_name" name="title" placeholder="请输入文章标题">
@@ -49,6 +50,7 @@
 							initialContent:'请输入文章内容',
 				        });
 		</script>
+        <input type="hidden" name="action" value="add">
 		<input type="submit" class="btn btn-success" value="添加"/>
 	</form>
 </div>
