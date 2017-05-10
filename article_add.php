@@ -1,21 +1,50 @@
 <?php
 	include ('nav.php');
-	
-	$categorys = db_find('category',['status'=>0]);
+	include ('upload.php');
+	$categorys = db_find('category',['status'=>0]);	//获取分类
+    define('TABLE','article');
 	//如果提交为post
 	if($method == 'POST')
 	{
 		$data = $_POST;
-		if(empty($data['cover_img']))
+		$data['cover_img'] = upload($_FILES['cover_img']);
+		$data['content']   = trim($data['content']);
+		$data['add_time']  = date('Y-m-d H:i:s',time());
+ 		$insert_r = db_insert(TABLE,$data);
+ 		if($insert_r == false)
+        {
+            error('添加文章失败');
+        }
+        else
+        {
+            success('','添加文章成功');
+        }
+	}
+
+    /**
+     * 上传封面图 获取图片路径
+     * @param $file
+     * @return bool|mixed 图片路径
+     */
+	function upload($file)
+	{
+		if(empty($file))
 		{
 			error('请上传文章封面图');
 		}
-		
+		//上传文章图片
+		$upload_obj = new Upload;
+        $upload_path = $upload_obj->uploadFile($file,'5000','img/article/cover');
+		if($upload_path == FALSE)
+		{
+			error($upload_obj::$error);
+		}
+		return $upload_path;
 	}
 ?>
 <!DOCTYPE >
 <div id="" class="container">
-	<form action="article.php" method="post"  enctype="multipart/form-data">
+	<form action="" method="post"  enctype="multipart/form-data" id="upfile">
 		<div class="form-group">
 			<label for="article_name">文章标题</label>
 	    	<input type="text" class="form-control" id="article_name" name="title" placeholder="请输入文章标题">
@@ -49,7 +78,6 @@
 							initialContent:'请输入文章内容',
 				        });
 		</script>
-        <input type="hidden" name="action" value="add">
 		<input type="submit" class="btn btn-success" value="添加"/>
 	</form>
 </div>

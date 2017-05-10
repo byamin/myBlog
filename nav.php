@@ -41,7 +41,7 @@
 			 <div class="container-fluid">
 			 	<div class="navbar-header">
 				      <a class="navbar-brand" href="javascript:void(0)">
-				        <img alt="Brand" style="max-height: 30px;margin-top: -5px;" src="img/1131981.gif"class="img-circle">
+				        <img alt="Brand" style="max-height: 30px;margin-top: -5px;" src=""class="img-circle">
 				      </a>
 			 	</div>
 			 	<ul class="nav navbar-nav navbar-right">
