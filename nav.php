@@ -1,32 +1,3 @@
-<?php
-	$conf = include 'xiunophp/conf.php';
-	include 'xiunophp/xiunophp.php';
-	
-	/**
-     * 成功函数
-     * @param $url
-     * @param $msg
-     */
-    function success($url,$msg){
-        header('content-type:text/html;charset=utf-8');
-        if(strpos($url,'http')){
-            echo "<script>alert('$msg');window.location.href = '$url'</script>";
-        }
-        echo "<script>alert('$msg');window.location.href = '$url'</script>";
-        die;
-    }
-
-    /**
-     * 失败函数
-     * @param $msg
-     */
-    function error($msg){
-        header('content-type:text/html;charset=utf-8');
-        echo "<script>alert('$msg');history.go(-1);</script>";
-        die;
-    }
-    
-	?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -35,6 +6,10 @@
 		<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrop.min.css"/>
+<!--        layer-->
+        <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
+        <link href="https://cdn.bootcss.com/layer/3.0.1/skin/default/layer.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/layer/3.0.1/skin/moon/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse">

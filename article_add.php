@@ -1,4 +1,5 @@
 <?php
+    include ('function.php');
 	include ('nav.php');
 	include ('upload.php');
 	$categorys = db_find('category',['status'=>0]);	//获取分类
