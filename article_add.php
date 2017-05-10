@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 	include ('nav.php');
 	
 	$categorys = db_find('category',['status'=>0]);
