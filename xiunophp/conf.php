@@ -14,7 +14,7 @@ return array (
                 'host' => 'localhost',
                 'user' => 'root',
                 'password' => 'root',
-                'name' => 'test',
+                'name' => 'myblog',
                 'tablepre' => '',
                 'charset' => 'utf8',
                 'engine' => 'innodb',
