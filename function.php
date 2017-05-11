@@ -11,10 +11,10 @@ include 'xiunophp/xiunophp.php';
 
 /**
  * 成功函数
- * @param $url
  * @param $msg
+ * @param $url
  */
-function success($url,$msg){
+function success($msg, $url = ''){
     header('content-type:text/html;charset=utf-8');
     if(strpos($url,'http')){
         echo "<script>alert('$msg');window.location.href = '$url'</script>";

@@ -21,3 +21,19 @@
 <?php exit;?>	2017-05-11 17:57:22	127.0.0.1	/hbuider/article_add.php	0	UPDATE article SET `title`='法师打发',`category_id`='1',`content`='<p>法师打发</p>',`add_time`='2017-05-11 17:57:22',`cover_img`=''  WHERE `id`=0 
 <?php exit;?>	2017-05-11 17:57:38	127.0.0.1	/hbuider/article_add.php	0	UPDATE article SET `title`='法师打发',`category_id`='1',`content`='<p>法师打发</p>',`add_time`='2017-05-11 17:57:38',`cover_img`=''  WHERE `id`=0 
 <?php exit;?>	2017-05-11 17:59:08	127.0.0.1	/hbuider/article_add.php	0	UPDATE article SET `title`='法师打发',`category_id`='1',`content`='<p>法师打发</p>',`add_time`='2017-05-11 17:59:08',`cover_img`=''  WHERE `id`=0 
+<?php exit;?>	2017-05-11 21:27:10	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试1','1','<p>测试1</p>','2017-05-11 21:27:10','img/article/cover/1494509230bd.png')
+<?php exit;?>	2017-05-11 21:27:28	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试1','1','<p>测试1</p>','2017-05-11 21:27:28','img/article/cover/1494509248bd.png')
+<?php exit;?>	2017-05-11 21:27:42	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试2','1','<p>测试2</p>','2017-05-11 21:27:42','img/article/cover/1494509262bd.png')
+<?php exit;?>	2017-05-11 21:28:33	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试2','1','<p>测试2</p>','2017-05-11 21:28:33','img/article/cover/1494509313bd.png')
+<?php exit;?>	2017-05-11 21:29:33	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试2','1','<p>测试2</p>','2017-05-11 21:29:33','img/article/cover/1494509373bd.png')
+<?php exit;?>	2017-05-11 21:31:51	127.0.0.1	/myBlog/article_add.php?action=edit&id=4	0	UPDATE article SET `title`='测试2',`category_id`='1',`content`='<p>测试2fasdf</p>',`add_time`='2017-05-11 21:31:51'  WHERE `id`=4 
+<?php exit;?>	2017-05-11 21:46:48	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试后','1','<p>法师打发</p>','2017-05-11 21:46:48','img/article/cover/1494510408bd.png')
+<?php exit;?>	2017-05-11 21:47:27	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('文章','1','<p>去去去</p>','2017-05-11 21:47:27','img/article/cover/1494510447bd.png')
+<?php exit;?>	2017-05-11 21:47:40	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`add_time`,`cover_img`) VALUES ('测试','1','<p>法师打发&nbsp;</p>','2017-05-11 21:47:40','img/article/cover/1494510460bd.png')
+<?php exit;?>	2017-05-11 21:47:56	127.0.0.1	/myBlog/article_add.php?action=edit&id=8	0	UPDATE article SET `title`='文章',`category_id`='1',`content`='<p>去去去反反复复</p>',`add_time`='2017-05-11 21:47:56'  WHERE `id`=8 
+<?php exit;?>	2017-05-11 21:54:22	127.0.0.1	/myBlog/article_add.php?action=edit&id=8	0	UPDATE article SET `title`='文章',`category_id`='1',`content`='<p>去去去反反复复</p>',`add_time`='2017-05-11 21:54:22',`cover_img`='img/article/cover/14945108621208295.png'  WHERE `id`=8 
+<?php exit;?>	2017-05-11 22:52:20	127.0.0.1	/myBlog/category_add.php	0	INSERT INTO category (`category_name`) VALUES ('')
+<?php exit;?>	2017-05-11 22:53:00	127.0.0.1	/myBlog/category_add.php	0	INSERT INTO category (`category_name`) VALUES ('')
+<?php exit;?>	2017-05-11 22:53:23	127.0.0.1	/myBlog/category_add.php	0	INSERT INTO category (`category_name`) VALUES ('')
+<?php exit;?>	2017-05-11 22:55:25	127.0.0.1	/myBlog/category_add.php	0	INSERT INTO category (`category_name`) VALUES ('技术分享')
+<?php exit;?>	2017-05-11 22:58:06	127.0.0.1	/myBlog/category_list.php	0	UPDATE category SET `status`='1'  WHERE `id`=6 

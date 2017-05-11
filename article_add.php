@@ -10,27 +10,36 @@
 		$data = $_POST;
 		$is_add = (int) $data['is_add'];
 		$id = (int) $data['id'];
-
         $data['content']   = trim($data['content']);
         $data['add_time']  = date('Y-m-d H:i:s',time());
         unset($data['is_add']);
         unset($data['id']);
-
         //判断是添加还是编辑
         if($is_add == 1)
         {
-            $upload_img = upload_img($_FILES['cover_img']);
-            $data['cover_img'] = $upload_img;
-            $msg_info = '添加';
+            $alert_info = '添加';
+            $upload_data = upload($_FILES['cover_img']);
+            //图片上传未成功
+            if($upload_data['status'] == 0)
+            {
+                error($upload_data['msg']);
+            }
+            $data['cover_img'] = $upload_data['msg'];
             $result = db_insert(TABLE,$data);
         }
-        else
+        else if($is_add ==2)
         {
-            $msg_info = '编辑';
+            $alert_info = '编辑';
             //有图片去上传图片
-            if($_FILES)
+            if($_FILES['cover_img']['size'] != 0)
             {
-                $data['cover_img'] = upload_img($_FILES['cover_img']);
+                $upload_data = upload($_FILES['cover_img']);
+                //图片上传未成功
+                if($upload_data['status'] == 0)
+                {
+                    error($upload_data['msg']);
+                }
+                $data['cover_img'] = $upload_data['msg'];
             }
             else
             {
@@ -38,16 +47,13 @@
             }
             $result = db_update(TABLE,['id'=>$id],$data);
         }
-
 		if($result == false)
         {
-            $alert['class'] = 'danger';
-            $alert['msg']   = "$msg_info.文章失败";
+           error($alert_info."文章失败");
         }
         else
         {
-            $alert['class'] = 'success';
-            $alert['msg']   = "$msg_info.文章成功";
+           success($alert_info . "文章成功", 'article_list.php');
         }
 	}
 	//如果提交为get
@@ -66,49 +72,19 @@
     }
 
     /**
-     * 上传图片
-     * @param $file
-     * @return bool
-     */
-    function upload_img($file)
-    {
-        $upload_data = upload($file);
-        //图片上传未成功
-        if($upload_data['status'] == 0)
-        {
-            $alert = $upload_data['alert'];
-            return false;
-        }
-        return $upload_data['upload_path'];
-    }
-
-    /**
      * 上传封面图 获取图片路径
      * @param $file
      * @return bool|mixed 图片路径
      */
 	function upload($file)
 	{
-		if(empty($file['size'] == 0))
+		if($file['size'] == 0)
 		{
-            $data['alert']['class'] = 'danger';
-            $data['alert']['msg']  = "请上传文章封面图";
-            $data['status'] = 0;
-            return $data;
+		    return ['msg'=>'请上传图片','status'=>0];
 		}
 		//上传文章图片
 		$upload_obj = new Upload;
-        $upload_path = $upload_obj->uploadFile($file,'50000','img/article/cover');
-		if($upload_path == FALSE)
-		{
-            $data['alert']['class'] = 'danger';
-            $data['alert']['msg']  = $upload_obj::$error;
-            $data['status'] = 0;
-            return $data;
-		}
-        $data['status'] = 200;
-        $data['upload_path'] = $upload_path;
-		return $data;
+        return $upload_obj->uploadFile($file,'50000','img/article/cover');
 	}
 ?>
 <!DOCTYPE >
@@ -168,8 +144,8 @@
                             ue.setContent('<?php if(isset($article) && !empty($article['content'])){echo $article['content'];}else{echo '';} ?>');
                         });
 		</script>
-        <input type="hidden" name="is_add" value="<?php if($article){echo 1;}else{echo 0;} ?>">
-        <input type="hidden" name="id" value="<?php $_GET['id'];?>">
+        <input type="hidden" name="is_add" value="<?php echo isset($article)?2:1; ?>">
+        <input type="hidden" name="id" value="<?php echo isset($_GET['id'])?$_GET['id']:'';?>">
 		<input type="submit" class="btn btn-success" value="<?php if(isset($article)){echo '编辑';}else{echo '添加';} ?>"/>
 	</form>
 </div>

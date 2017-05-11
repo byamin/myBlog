@@ -52,9 +52,9 @@ class Upload{
         //文件转移
         $pathname = $path.'/'.$this->getName($file);
         if(move_uploaded_file($file['tmp_name'],$pathname)){
-            return $pathname;
+            return ['msg'=>$pathname,'status'=>200];
         }else{
-            return Upload::$error;
+            return ['msg'=>Upload::$error,'status'=>0];
         }
     }
     //创建目录的方法

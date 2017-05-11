@@ -2,7 +2,7 @@
 	include('function.php');
 
 	$page = isset($_GET['page'])?$_GET['page']:1;
-    $page_size = 10;
+    $page_size = 5;
     $offset = $page_size*($page-1);
 
     $page_count = db_sql_find('SELECT count(*) as page_count from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0')[0]['page_count'];

@@ -16,3 +16,5 @@
 <?php exit;?>	2017-05-11 15:54:55	127.0.0.1	/hbuider/article_list.php	0	sql errno: 1064, errstr: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '8' at line 1
 <?php exit;?>	2017-05-11 15:55:41	127.0.0.1	/hbuider/article_list.php	0	sql errno: 1064, errstr: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '8' at line 1
 <?php exit;?>	2017-05-11 15:55:48	127.0.0.1	/hbuider/article_list.php	0	sql errno: 1064, errstr: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '8' at line 1
+<?php exit;?>	2017-05-11 22:59:15	127.0.0.1	/myBlog/category_add.php?action=edit&id=2	0	sql errno: 1054, errstr: Unknown column 'a.status' in 'where clause'
+<?php exit;?>	2017-05-11 22:59:20	127.0.0.1	/myBlog/category_add.php?action=edit&id=2	0	sql errno: 1054, errstr: Unknown column 'a.status' in 'where clause'
