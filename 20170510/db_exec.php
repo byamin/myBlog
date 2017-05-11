@@ -1,1 +1,0 @@
-<?php exit;?>	2017-05-10 22:28:05	127.0.0.1	/myBlog/article_add.php	0	INSERT INTO article (`title`,`category_id`,`content`,`cover_img`,`add_time`) VALUES ('测试1','1','<p>测试1<img src=\"http://7xsvey.com1.z0.glb.clouddn.com/1494426474.png\" title=\"1494426474.png\" alt=\"bd.png\"/></p>','img/article/cover/1494426485bd.png','2017-05-10 22:28:05')

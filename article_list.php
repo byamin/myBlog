@@ -1,6 +1,14 @@
 <?php
 	include('function.php');
-	$articles = db_sql_find('SELECT a.*,c.category_name from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0');
+
+	$page = isset($_GET['page'])?$_GET['page']:1;
+    $page_size = 10;
+    $offset = $page_size*($page-1);
+
+    $page_count = db_sql_find('SELECT count(*) as page_count from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0')[0]['page_count'];
+	$articles = db_sql_find("SELECT a.*,c.category_name from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0 LIMIT $offset,$page_size");
+
+	$page_html = multipage($page_count,$page,$page_size);
 	//有post请求时
 	if($method == 'POST')
     {
@@ -51,7 +59,7 @@
 					<td><?php echo $article['title'];?></td>
 					<td><?php echo $article['add_time'];?></td>
 					<td>
-						<a href="javascript:void(0);" class="btn btn-primary btn-xs edit" data-id="<?php echo $article['id'];?>">
+						<a href="article_add.php?action=edit&id=<?php echo $article['id'];?>" class="btn btn-primary btn-xs edit" data-id="<?php echo $article['id'];?>">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
 						<a href="javascript:void(0);" class="btn btn-danger btn-xs delete" data-id="<?php echo $article['id'];?>">
@@ -62,6 +70,10 @@
 			<?php endforeach;?>
 		</tbody>
 	</table>
+
+    <div class="page text-center">
+        <?php echo $page_html;?>
+    </div>
 </div>
 <script>
     $(function () {
@@ -77,10 +89,8 @@
                         data:{'action':'delete','id':id},
                         dataType:'json',
                         success : function (data) {
-                            layer.alert(data.message,{icon: data.code},function (index) {
-                                layer.close(index); //关闭当前窗口
-                                window.location.reload();   //刷新当前页面
-                            });
+                            layer.msg(data.message,{icon: data.code,time:1000});
+                            window.location.reload();
                         }
                     });
                 }
