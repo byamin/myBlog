@@ -82,4 +82,5 @@ function multipage($count, $page, $pagsize = 10, $para = '') {
 
     return $multipage;
 }
+
 ?>

@@ -19,6 +19,12 @@
 				        <img alt="Brand" style="max-height: 30px;margin-top: -5px;" src=""class="img-circle">
 				      </a>
 			 	</div>
+
+                 <ul class="nav navbar-nav">
+                     <li><a href="article_list.php">文章</a></li>
+                     <li><a href="category_list.php">文章分类</a></li>
+                 </ul>
+
 			 	<ul class="nav navbar-nav navbar-right">
 			        <li class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">阿明 <span class="caret"></span></a>
@@ -27,7 +33,7 @@
 			          </ul>
 			        </li>
 		      	</ul>
-			  </div>
+             </div>
 		</nav>
 	</body>
 </html>
