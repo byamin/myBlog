@@ -9,7 +9,7 @@ $conf = include 'xiunophp/conf.php';
 include 'xiunophp/xiunophp.php';
 
 //判断是否登录
-if(!isset($_COOKIE['login_flag']) && !strstr($_SERVER['PHP_SELF'],'login.php'))
+if(!isset($_COOKIE['login_flag']) && !strstr($_SERVER['PHP_SELF'],'login.php') && !strstr($_SERVER['PHP_SELF'],'myBlog/index.php'))
 {
     error('请登录','login.php');
 }
@@ -82,7 +82,7 @@ function multipage($count, $page, $pagsize = 10, $para = '') {
         $multipage .= ($page < $maxpage ? '<li><a href="?page='.($page + 1).$para.'" >&raquo;</a></li>' : '').
             ($to < $maxpage ? '<li><a href="?page='.$maxpage.$para.'" class="last" >...'.$maxpage.'</a></li>' : '');
 
-        $multipage = $multipage ? '<ul class="pagination">'.$multipage.'</ul>' : '';
+        $multipage = $multipage ? '<ul class="pagination" style="display: block;">'.$multipage.'</ul>' : '';
     }
 
     return $multipage;
