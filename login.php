@@ -42,8 +42,9 @@
 			}
 			else
 			{
-				//登陆成功，保存登录验证login_flag
-				setcookie('login_flag',1,3600);
+				//登陆成功，保存登录信息
+				setcookie('login_flag',1,time()+3600);
+				setcookie('user_name',$user_info[0]['user_name'],time()+3600);
 				success('登录成功','article_list.php');
 			}
 		}
@@ -54,7 +55,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>测试</title>
+		<title>blog</title>
 		<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrop.min.css"/>

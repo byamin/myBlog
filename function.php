@@ -5,9 +5,14 @@
  * Date: 2017/5/11
  * Time: 0:14
  */
-
 $conf = include 'xiunophp/conf.php';
 include 'xiunophp/xiunophp.php';
+
+//判断是否登录
+if(!isset($_COOKIE['login_flag']) && !strstr($_SERVER['PHP_SELF'],'login.php'))
+{
+    error('请登录','login.php');
+}
 
 /**
  * 成功函数
