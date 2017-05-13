@@ -3,12 +3,20 @@
 	define('TABLE', 'admin_login');
 	if($method == 'POST')	//post请求执行
 	{
+		function get_userinfo($user_name)
+		{
+			return db_find(TABLE,['user_name'=>$user_name]);
+		}	
 		//判断是否是注册
 		if(isset($_POST['action']) && $_POST['action'] == 'register')
 		{
 			$data['salt'] = base64_encode(md5(time(),mt_rand(1, 10000000)));	//生成一个不重复的随机数 base64_encode 解码				
 			$data['user_name'] = trim($_POST['user_name']);
 			$data['password']  = md5(md5(trim($_POST['password'])).$data['salt']);
+			if(get_userinfo($data['user_name']) != false)	//判断是否注册
+			{
+				xn_message(2, '该用户名已注册');
+			}
 			if(db_insert(TABLE, $data) == FALSE)	//执行失败
 			{
 				xn_message(2,'注册失败');	
@@ -20,8 +28,26 @@
 		} 
 		else	//登录操作
 		{
-			
+			$user_name = isset($_POST['user_name'])?$_POST['user_name']:'';
+			//查询是否存在用户信息
+			$user_info = get_userinfo($user_name);
+			if($user_info == false)	//判断是否注册
+			{
+				error('用户名不存在');
+			}
+			$password = md5(md5($_POST['password']).$user_info[0]['salt']);	//加盐加密后的md5值
+			if($password != $user_info[0]['password'] || $user_name != $user_info[0]['user_name'])	//不匹配
+			{
+				error('登录失败，密码错误！');
+			}
+			else
+			{
+				//登陆成功，保存登录验证login_flag
+				setcookie('login_flag',1,3600);
+				success('登录成功','article_list.php');
+			}
 		}
+		
 	}
 ?>
 <!DOCTYPE html>
@@ -54,17 +80,17 @@
 	}
 </style>
 <div class="container">
-	<form action="">
+	<form action="" method="post">
 		<div class="form-group">
 			<div class="input-group">
 				<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-				<input type="text" class="form-control" id="user_name" placeholder="请输入用户名">
+				<input type="text" class="form-control" name="user_name" id="user_name" placeholder="请输入用户名">
 			</div>
 		</div>
 		<div class="from-group">
 			<div class="input-group">
 				<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-				<input type="password" class="form-control" id="password" placeholder="请输入密码">
+				<input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
 			</div>
 		</div>
 			<input type="submit" class="btn btn-primary btn-sm login" name="" id="" value="登录"/>
@@ -88,8 +114,9 @@
 			dataType:'JSON',
 			data:{'user_name':user_name,'password':password,'action':'register'},
 			success:function (data) {
-	                    layer.msg(data.message,{icon: data.code,time:1000});
-	                    <!--window.location.reload();-->      
+	                    layer.msg(data.message,{icon: data.code,time:1000},function(){
+	                    	window.location.reload();      
+	                    });
                     }
 		});
 	})
