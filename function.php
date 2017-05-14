@@ -8,10 +8,20 @@
 $conf = include 'xiunophp/conf.php';
 include 'xiunophp/xiunophp.php';
 
-//判断是否登录
-if(!isset($_COOKIE['login_flag']) && !strstr($_SERVER['PHP_SELF'],'login.php') && !strstr($_SERVER['PHP_SELF'],'myBlog/index.php'))
+//不验证登录文件列表
+$not_verifys = ['login.php','index.php','header.php','footer.php','article.php?id'];
+
+$verifys_flag = 0;  //是否需要验证  0不需要 1需要
+foreach ($not_verifys as $item)
 {
-    error('请登录','login.php');
+    if(strstr($_SERVER['REQUEST_URI'],$item))  //是否有不验证的文件
+    {
+        $verifys_flag = 1;
+    }
+}
+if($verifys_flag != 1 && !isset($_COOKIE['login_flag']))
+{
+   success('请登录','login.php');
 }
 
 /**

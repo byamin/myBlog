@@ -58,7 +58,7 @@
 		<title>blog</title>
 		<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/bootstrop.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 <!--        layer-->
         <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
         <link href="https://cdn.bootcss.com/layer/3.0.1/skin/default/layer.css" rel="stylesheet">

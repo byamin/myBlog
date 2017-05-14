@@ -1,0 +1,1 @@
+<?php exit;?>	2017-05-14 14:26:48	127.0.0.1	/myBlog/article_add.php?action=edit&id=9	0	UPDATE article SET `title`='测试',`category_id`='2',`content`='<p>法师打发&nbsp;</p>',`add_time`='2017-05-14 14:26:48'  WHERE `id`=9 
