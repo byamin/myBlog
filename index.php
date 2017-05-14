@@ -16,6 +16,10 @@
     {
         $a_where = "AND a.category_id =$cat_id";
     }
+	if($keyword)
+	{
+		$a_where = "AND a.title like '%$keyword%'";
+	}
 
     $page_count = db_sql_find("SELECT count(*) as page_count from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0 $a_where")[0]['page_count'];
     $articles = db_sql_find("SELECT a.*,c.category_name from article as a LEFT JOIN category as c on a.category_id = c.id where a.status = 0 $a_where ORDER BY a.add_time DESC LIMIT $offset,$page_size");
@@ -89,7 +93,7 @@
         </div>
       </div>
       <div class="widget widget_search">
-        <form class="navbar-form" action="" method="post">
+        <form class="navbar-form" action="" method="get">
           <div class="input-group">
             <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
             <span class="input-group-btn">

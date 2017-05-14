@@ -9,12 +9,12 @@ $conf = include 'xiunophp/conf.php';
 include 'xiunophp/xiunophp.php';
 
 //不验证登录文件列表
-$not_verifys = ['login.php','index.php','header.php','footer.php','article.php?id'];
+$not_verifys = ['login.php','index.php','header.php','footer.php','article.php?id','keyword','search'];
 
 $verifys_flag = 0;  //是否需要验证  0不需要 1需要
 foreach ($not_verifys as $item)
 {
-    if(strstr($_SERVER['REQUEST_URI'],$item))  //是否有不验证的文件
+    if(strstr($_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'],$item))  //是否有不验证的文件
     {
         $verifys_flag = 1;
     }
