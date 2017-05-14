@@ -37,14 +37,14 @@
 
       <div class="title" id="comment">
        <!--高速版-->
-		<div id="SOHUCS" sid="请将此处替换为配置SourceID的语句"></div>
+		<!--<div id="SOHUCS" sid="请将此处替换为配置SourceID的语句"></div>
 		<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 			<script type="text/javascript">
 				window.changyan.api.config({
 				appid: 'cyt0M0shM',
 				conf: 'prod_bbfab99d913bf0453433bab2cf1493d5'
 			});
-		</script>
+		</script>-->
       </div>
     </div>
   </div>
